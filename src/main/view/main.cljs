@@ -16,27 +16,27 @@
                               :placeholder placeholder
                               :value value}])
 
-(defn add-link-button
-  [btn-name]
-  [:button.btn {:on-click #(add-link-click (:twitch-link @app-state))} btn-name])
+(defn button
+  [btn-name handle-click]
+  [:button.btn {:on-click handle-click} btn-name])
 
 (defn add-link
   [twitch-link]
-  [:li {:key twitch-link} twitch-link])
+  [:li.list-link {:key twitch-link} twitch-link])
 
 (defn list-links
   []
-  [:ul (if-let [links (map add-link (:twitch-clips @app-state))]
-         links
-         [:li "No links added yet"])])
+  [:ul.links-list (if-let [links (seq (map add-link (:twitch-clips @app-state)))]
+                    links
+                    [:li "No links added yet"])])
 
 (defn main
   []
-  [:main
+  [:main.main__container
    [description "Add your clip link right below"]
    [twitch-link-input (:twitch-link @app-state) "Twitch clip link"]
-   [add-link-button "Add link"]
-   [list-links]])
+   [list-links]
+   [button "Generate video"]])
 
 (defn app
   []

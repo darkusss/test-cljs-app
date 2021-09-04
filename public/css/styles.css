@@ -14,10 +14,31 @@ body {
     color: var(--blue);
 }
 
+/* HEADER */
+
+.header__container {
+    height: 10vh;
+    max-height: 10vh
+}
+
+/* FOOTER */
+
+.footer__container {
+
+}
+
+/* APP */
 .app__container {
     margin: 0 auto;
     max-width: 1270px;
     width: 100%;
+}
+
+
+
+.main__container {
+    height: 80vh;
+    max-height: 80vh
 }
 
 .description__container {
@@ -54,4 +75,36 @@ body {
 
 .btn:hover {
     background-color: var(--darken-blue);
+}
+
+.links-list {
+    /* scrollbar for firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue) none;
+    max-height: 400px;
+    height: 40vh;
+
+    overflow-y: auto;
+}
+
+/* scrollbar for chrome, edge and safari */
+.links-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.links-list:-webkit-scrollbar-track {
+    background: none;
+  }
+
+.links-list::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 10px;
+    border: 3px solid var(--blue);
+  }
+
+.links-list .list-link {
+    list-style: "🚀";
+    padding: .25rem .5rem;
+
+    text-decoration: underline;
 }

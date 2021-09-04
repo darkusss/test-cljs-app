@@ -2,5 +2,5 @@
 
 (defn header
   []
-  [:header
-   [:h2 "I will be here soon"]])
+  [:header.header__container
+   [:h2 "Videocliper 📼"]])

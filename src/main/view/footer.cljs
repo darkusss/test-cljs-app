@@ -2,5 +2,5 @@
 
 (defn footer
   []
-  [:footer
-   [:h2 "I am a footer"]])
+  [:footer.footer__container
+   [:p "All rights are not reserved. I dont care ✨"]])
