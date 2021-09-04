@@ -1,33 +1,46 @@
 (ns view.main
   (:require [state :refer [app-state]]
-            [events :refer [input-change]]))
+            [events.events :refer [input-change add-link-click add-link-on-enter]]
+            [view.header :refer [header]]
+            [view.footer :refer [footer]]))
 
-(defn header
-  []
-  [:header
-   [:h2 "I am a header"]])
-
-(defn footer
-  []
-  [:footer
-   [:h2 "I am a footer"]])
-
+(defn description
+  [desc]
+  [:div.description__container
+   [:p.description desc]])
 
 (defn twitch-link-input
   [value placeholder]
-  [:input {:on-change #(input-change %)
-           :placeholder placeholder
-           :value value}])
+  [:input.addLink__container {:on-change #(input-change %)
+                              :on-key-press #(add-link-on-enter % (:twitch-link @app-state))
+                              :placeholder placeholder
+                              :value value}])
+
+(defn add-link-button
+  [btn-name]
+  [:button.btn {:on-click #(add-link-click (:twitch-link @app-state))} btn-name])
+
+(defn add-link
+  [twitch-link]
+  [:li {:key twitch-link} twitch-link])
+
+(defn list-links
+  []
+  [:ul (if-let [links (map add-link (:twitch-clips @app-state))]
+         links
+         [:li "No links added yet"])])
 
 (defn main
   []
   [:main
+   [description "Add your clip link right below"]
    [twitch-link-input (:twitch-link @app-state) "Twitch clip link"]
-   [:h1 (:twitch-link @app-state)]])
+   [add-link-button "Add link"]
+   [list-links]])
 
 (defn app
   []
-  [:div
+  [:div.app__container
    [header]
    [main]
    [footer]])
