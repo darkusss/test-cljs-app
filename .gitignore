@@ -1,6 +1,10 @@
 node_modules/
 public/js
 
+.env*
+.lsp*
+.calva*
+
 /target
 /checkouts
 /src/gen

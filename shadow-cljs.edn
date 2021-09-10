@@ -1,13 +1,14 @@
-;; shadow-cljs configuration
 {:source-paths
  ["src/main"]
 
 
  :dependencies
- [[reagent "1.1.0"]]
+ [[reagent "1.1.0"]
+  [cljs-ajax "0.8.4"]]
 
  :dev-http {8080 "public"}
  :builds
  {:frontend
   {:target :browser
-   :modules {:main {:init-fn app/start}}}}}
+   :modules {:main {:init-fn app/start}}
+   :compiler-options {:closure-defines {events.async/TWITCH_AUTHORIZATION_TOKEN #shadow/env "TWITCH_AUTHORIZATION_TOKEN"}}}}}

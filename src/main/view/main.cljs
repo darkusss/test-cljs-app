@@ -1,8 +1,9 @@
 (ns view.main
   (:require [state :refer [app-state]]
-            [events.events :refer [input-change add-link-click add-link-on-enter]]
+            [events.events :refer [input-change add-link-on-enter]]
             [view.header :refer [header]]
-            [view.footer :refer [footer]]))
+            [view.footer :refer [footer]]
+            [events.async :refer [run-something]]))
 
 (defn description
   [desc]
@@ -12,6 +13,7 @@
 (defn twitch-link-input
   [value placeholder]
   [:input.addLink__container {:on-change #(input-change %)
+                              :on-key-up #(run-something)
                               :on-key-press #(add-link-on-enter % (:twitch-link @app-state))
                               :placeholder placeholder
                               :value value}])

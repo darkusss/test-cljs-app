@@ -1,7 +1,7 @@
 (ns state
   (:require [reagent.core :refer [atom]]))
 
-(defonce app-state (atom {:twitch-link "Twitch link here"
+(defonce app-state (atom {:twitch-link ""
                           :twitch-clips []}))
 
 (defn clear-twitch-link
