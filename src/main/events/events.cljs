@@ -1,5 +1,5 @@
 (ns events.events
-  (:require [state :refer [app-state clear-twitch-link]]
+  (:require [state :refer [app-state clear-twitch-link!]]
             [helpers :refer [is-empty-link link-already-added validate-link-input]]
             [events.async :refer [get-twitch-clip]]))
 
@@ -16,7 +16,7 @@
         not-exists (not (link-already-added clip-link))]
     (when (and clipId not-exists not-empty)
       (get-twitch-clip clipId))
-    (clear-twitch-link)))
+    (clear-twitch-link!)))
 
 (defn add-link-on-enter
   [event clip-link]
