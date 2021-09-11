@@ -15,8 +15,8 @@
         not-empty (not (is-empty-link clip-link))
         not-exists (not (link-already-added clip-link))]
     (when (and clipId not-exists not-empty)
-      (get-twitch-clip clipId)
-      (clear-twitch-link))))
+      (get-twitch-clip clipId))
+    (clear-twitch-link)))
 
 (defn add-link-on-enter
   [event clip-link]

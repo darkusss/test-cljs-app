@@ -105,6 +105,8 @@ body {
 .clips-list .list-clip {
     list-style: "🚀";
     padding: .25rem .5rem;
+}
 
-    text-decoration: underline;
+.clips-list .no-clip {
+    list-style: none;
 }

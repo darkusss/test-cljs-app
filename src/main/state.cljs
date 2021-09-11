@@ -11,3 +11,7 @@
 (defn clear-twitch-clips
   []
   (swap! app-state assoc :twitch-clips []))
+
+(defn delete-clip
+  [clip-id]
+  (swap! app-state assoc :twitch-clips (filter #(not= clip-id (:id %)) (:twitch-clips @app-state))))
