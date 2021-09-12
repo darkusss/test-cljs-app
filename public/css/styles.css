@@ -110,3 +110,14 @@ body {
 .clips-list .no-clip {
     list-style: none;
 }
+
+.clip-info {
+    display: flex;
+}
+
+.clip-info-buttons {
+    margin-left: 1rem;
+
+    display: flex;
+    font-size: 1.5rem;
+}

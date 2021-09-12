@@ -15,6 +15,19 @@
 (defn remove-by-id [coll id]
   (remove #(= id (:id %)) coll))
 
+(defn update-show-clip [coll id]
+  (map (fn [x]
+         (when (= (:id x) id)
+           (update-in x [:show-clip?] #(if (true? %) false true)))) coll))
+
+(defn show-clip!
+  [clip-id]
+  (swap! app-state update :twitch-clips update-show-clip clip-id))
+
+(defn add-clip!
+  [clip]
+  (swap! app-state update :twitch-clips conj (assoc clip :show-clip? false)))
+
 (defn delete-clip!
   [clip-id]
   (swap! app-state update :twitch-clips remove-by-id clip-id))

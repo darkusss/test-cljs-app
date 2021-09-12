@@ -1,5 +1,5 @@
 (ns view.main
-  (:require [state :refer [app-state delete-clip!]]
+  (:require [state :refer [app-state delete-clip! show-clip!]]
             [events.events :refer [input-change add-link-on-enter]]
             [view.header :refer [header]]
             [view.footer :refer [footer]]))
@@ -29,16 +29,17 @@
 
 (defn clip-info-buttons
   [clip-id]
-  [:div
+  [:div.clip-info-buttons
+   [button "➜" (fn [] (show-clip! clip-id))]
    [button "×" (fn [] (delete-clip! clip-id))]])
 
 (defn add-clip-info
-  [{id :id title :title}]
+  [{id :id title :title show-clip :show-clip?}]
   [:li.list-clip {:key id} [:div
-                            [:div
+                            [:div.clip-info
                              [:h4 title]
                              (clip-info-buttons id)]
-                            (iframe-clip id)]])
+                            (when show-clip (iframe-clip id))]])
 
 (defn list-clips
   []

@@ -1,13 +1,13 @@
 (ns events.async
   (:require [ajax.core :refer [GET json-response-format]]
-            [state :refer [app-state]]))
+            [state :refer [add-clip!]]))
 
 (goog-define TWITCH_AUTHORIZATION_TOKEN "")
 
 
 (defn handler
   [response]
-  (swap! app-state update :twitch-clips conj (first (:data response))))
+  (add-clip! (first (:data response))))
 
 (defn error-handler
   [error]
