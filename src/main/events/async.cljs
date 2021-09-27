@@ -3,7 +3,7 @@
             [state :refer [add-clip!]]))
 
 (goog-define TWITCH_AUTHORIZATION_TOKEN "")
-
+(goog-define TWITCH_CLIENT_ID "")
 
 (defn handler
   [response]
@@ -18,4 +18,4 @@
                                                              :error-handler error-handler
                                                              :response-format (json-response-format {:keywords? true})
                                                              :headers {:Authorization TWITCH_AUTHORIZATION_TOKEN
-                                                                       :Client-Id "f29jj1jpfk8dc56xsxk7ask4nnlc57"}}))
+                                                                       :Client-Id TWITCH_CLIENT_ID}}))

@@ -33,7 +33,7 @@
    [button "➜" (fn [] (show-clip! clip-id))]
    [button "×" (fn [] (delete-clip! clip-id))]])
 
-(defn add-clip-info
+(defn clip-info
   [{id :id title :title show-clip :show-clip?}]
   [:li.list-clip {:key id} [:div
                             [:div.clip-info
@@ -41,18 +41,20 @@
                              (clip-info-buttons id)]
                             (when show-clip (iframe-clip id))]])
 
-(defn list-clips
-  []
-  [:ul.clips-list (if-let [clips (seq (map add-clip-info (:twitch-clips @app-state)))]
-                    clips
-                    [:li.no-clip [:strong "No clips added yet"]])])
+(defn list-of-clips
+  [clips]
+  [:ul.clips-list
+   (if (empty? clips)
+     [:li.no-clip [:strong "No clips added yet"]]
+     (for [clip clips]
+       (clip-info clip)))])
 
 (defn main
   []
   [:main.main__container
    [description "Add your clip link right below"]
    [twitch-clip-link-input (:twitch-link @app-state) "Twitch clip link"]
-   [list-clips]
+   [list-of-clips (:twitch-clips @app-state)]
    [button "Generate video"]])
 
 (defn app

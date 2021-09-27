@@ -4,11 +4,13 @@
 
  :dependencies
  [[reagent "1.1.0"]
-  [cljs-ajax "0.8.4"]]
+  [cljs-ajax "0.8.4"]
+  [aero "1.1.6"]]
 
  :dev-http {8080 "public"}
  :builds
  {:frontend
   {:target :browser
    :modules {:main {:init-fn app/start}}
-   :compiler-options {:closure-defines {events.async/TWITCH_AUTHORIZATION_TOKEN #shadow/env "TWITCH_AUTHORIZATION_TOKEN"}}}}}
+   :compiler-options {:closure-defines {events.async/TWITCH_AUTHORIZATION_TOKEN #shadow/env "TWITCH_AUTHORIZATION_TOKEN"
+                                        events.async/TWITCH_CLIENT_ID #shadow/env "TWITCH_CLIENT_ID"}}}}}
