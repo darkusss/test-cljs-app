@@ -1,6 +1,6 @@
 (ns view.main
-  (:require [state :refer [app-state delete-clip! show-clip!]]
-            [events.events :refer [input-change add-link-on-enter]]
+  (:require [state :refer [app-state delete-clip! show-clip! input-change! clear-input-error!]]
+            [events.events :refer [add-link-on-enter]]
             [view.header :refer [header]]
             [view.footer :refer [footer]]))
 
@@ -9,12 +9,19 @@
   [:div.description__container
    [:p.description desc]])
 
+(defn input-on-change
+  [event]
+  (input-change! event)
+  (clear-input-error!)
+  )
+
 (defn twitch-clip-link-input
   [value placeholder]
-  [:input.addLink__container {:on-change #(input-change %)
-                              :on-key-press #(add-link-on-enter % (:twitch-link @app-state))
-                              :placeholder placeholder
-                              :value value}])
+  [:div [:<> [:input.addLink__container {:on-change #(input-on-change %)
+                                         :on-key-press #(add-link-on-enter % (:twitch-link @app-state))
+                                         :placeholder placeholder
+                                         :value value}]
+         [:span.input-error (when (:input-error? @app-state) "The input link was incorrect or already added in the list below")]]])
 
 (defn button
   [btn-name handle-click]
@@ -45,17 +52,17 @@
   [clips]
   [:ul.clips-list
    (if (empty? clips)
-     [:li.no-clip [:strong "No clips added yet"]]
+     [:li.no-clip [:strong "Oh no... I am still empty"]]
      (for [clip clips]
        (clip-info clip)))])
 
 (defn main
   []
   [:main.main__container
-   [description "Add your clip link right below"]
+   [description "Add your twitch clip right below"]
    [twitch-clip-link-input (:twitch-link @app-state) "Twitch clip link"]
    [list-of-clips (:twitch-clips @app-state)]
-   [button "Generate video"]])
+   [button "Generate & download video"]])
 
 (defn app
   []

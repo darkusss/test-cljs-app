@@ -5,6 +5,8 @@ public/js
 .lsp*
 .calva*
 
+/.clj*
+
 /target
 /checkouts
 /src/gen

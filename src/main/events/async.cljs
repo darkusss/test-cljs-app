@@ -13,7 +13,7 @@
   [error]
   (.log js/console (str error)))
 
-(defn get-twitch-clip [clipId]
+(defn add-twitch-clip [clipId]
   (GET (str "https://api.twitch.tv/helix/clips?id=" clipId) {:handler handler
                                                              :error-handler error-handler
                                                              :response-format (json-response-format {:keywords? true})

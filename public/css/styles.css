@@ -1,3 +1,9 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
 :root {
     --yellow: hsl(37, 98%, 53%);
     --gray: hsl(0, 0%, 90%);
@@ -5,6 +11,7 @@
     --blue: hsl(221, 51%, 16%);
     --darken-blue: hsl(222, 60%, 11%);
     --black: hsl(0, 0%, 0%);
+    --red: rgb(255, 38, 0);
 
     font-family: 'Azeret Mono';
 }
@@ -53,14 +60,23 @@ body {
 .addLink__container {
     width: 100%;
 
-    background: none;
-    outline: none;
+    background: var(--blue);
 
-    border: .5rem dashed var(--blue);
+    border-radius: 1rem;
     padding: 2rem 2rem;
 
     font-size: 1.5rem;
-    color: var(--blue);   
+    color: var(--white);
+    
+    transition: 200ms all ease-in-out;
+}
+
+.addLink__container:focus {
+    outline: 2px solid var(--white);
+}
+
+.addLink__container:hover {
+    box-shadow: 0px 0px 0px 2px var(--white);
 }
 
 .btn {
@@ -81,7 +97,10 @@ body {
     /* scrollbar for firefox */
     scrollbar-width: thin;
     scrollbar-color: var(--blue) none;
-    max-height: 400px;
+
+    margin-top: 5rem;
+
+    max-height: 600px;
     height: 40vh;
 
     overflow-y: auto;
@@ -120,4 +139,11 @@ body {
 
     display: flex;
     font-size: 1.5rem;
+}
+
+.input-error {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: bold;
+    color: var(--red)
 }
