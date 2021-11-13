@@ -1,9 +1,8 @@
 # Twitchcliper (will be changed later or not)
 
-
-Project in which user can generate video 
-from a bunch of twich clips (aka highlights) in a minutes.
+*It brings more viewers if you are first*
 
 
 ### Goal
-Fasten process of creating a video from twich clips and upload them somewhere (youtube, vimeo, etc)
+Fasten a process of creating a video from twich clips and upload them to youtube
+
