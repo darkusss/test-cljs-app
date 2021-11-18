@@ -1,16 +1,16 @@
 (ns events.events
   (:require [state :refer [app-state clear-twitch-link! show-input-error!]]
-            [events.async :refer [add-twitch-clip]]
+            [events.async :refer [add-twitch-clip send-clips]]
             [clojure.string :as string]))
 
 
-(defn link-added
+(defn link-in-list
   [clip-link]
-  (some #(= clip-link %) (:twitch-clips @app-state)))
+  (some #(= clip-link (:id %)) (:twitch-clips @app-state)))
 
-(defn is-empty-link
-  [clip-link]
-  (string/blank? clip-link))
+(defn is-empty-str
+  [str]
+  (string/blank? str))
 
 (defn validate-link-input
   [link]
@@ -19,15 +19,25 @@
       (subs link (+ clip-id-pos 6))
       false)))
 
+(defn not-empty-str
+  [input-clip]
+  (not (is-empty-str input-clip)))
+
+(defn not-link-in-list
+  [link]
+  (not (link-in-list link)))
+
 (defn add-link
   [clip-link]
-  (let [clipId (validate-link-input clip-link)
-        not-empty (not (is-empty-link clip-link))
-        not-exist (not (link-added clip-link))]
-    (if (and clipId not-exist not-empty)
+  (let [clipId (validate-link-input clip-link)]
+    (if (and clipId (not-empty-str clipId) (not-link-in-list clipId))
       (add-twitch-clip clipId)
-      (show-input-error!)) 
+      (show-input-error!))
     (clear-twitch-link!)))
+
+(defn send-clips-to
+  [clips]
+  (send-clips clips))
 
 (defn add-link-on-enter
   [event clip-link]

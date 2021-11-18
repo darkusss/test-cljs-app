@@ -1,6 +1,6 @@
 (ns view.main
   (:require [state :refer [app-state delete-clip! show-clip! input-change! clear-input-error!]]
-            [events.events :refer [add-link-on-enter]]
+            [events.events :refer [add-link-on-enter send-clips-to]]
             [view.header :refer [header]]
             [view.footer :refer [footer]]))
 
@@ -35,17 +35,17 @@
             :allowFullScreen true}])
 
 (defn clip-info-buttons
-  [clip-id]
+  [clip-id show-clip]
   [:div.clip-info-buttons
-   [button "➜" (fn [] (show-clip! clip-id))]
-   [button "×" (fn [] (delete-clip! clip-id))]])
+   [button (if show-clip "Show less" "Show more") (fn [] (show-clip! clip-id))]
+   [button "Remove" (fn [] (delete-clip! clip-id))]])
 
 (defn clip-info
   [{id :id title :title show-clip :show-clip?}]
   [:li.list-clip {:key id} [:div
                             [:div.clip-info
                              [:h4 title]
-                             (clip-info-buttons id)]
+                             (clip-info-buttons id show-clip)]
                             (when show-clip (iframe-clip id))]])
 
 (defn list-of-clips
@@ -62,7 +62,7 @@
    [description "Add your twitch clip right below"]
    [twitch-clip-link-input (:twitch-link @app-state) "Twitch clip link"]
    [list-of-clips (:twitch-clips @app-state)]
-   [button "Generate & download video"]])
+   [button "Generate & download video" (fn [] (send-clips-to {:hello "WORLD??"})) ]])
 
 (defn app
   []

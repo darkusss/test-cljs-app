@@ -80,17 +80,23 @@ body {
 }
 
 .btn {
-    background-color: var(--blue);
-    color: var(--gray);
+    background: var(--blue);
+    color: var(--white);
 
     border: none;
+    border-radius: 10px;
     padding: 0.5rem 1rem;
 
-    transition: background 100ms ease-in;
+    transition: 200ms all ease-in-out;
+
+}
+
+.btn:focus {
+    outline: 1px solid var(--white);
 }
 
 .btn:hover {
-    background-color: var(--darken-blue);
+    box-shadow: 0px 0px 0px 1px var(--white);
 }
 
 .clips-list {
@@ -132,13 +138,17 @@ body {
 
 .clip-info {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .clip-info-buttons {
+
+    width: 250px;
     margin-left: 1rem;
 
     display: flex;
-    font-size: 1.5rem;
+    justify-content: space-between;
 }
 
 .input-error {
