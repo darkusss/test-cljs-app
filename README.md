@@ -1,8 +1,7 @@
-# Twitchcliper (will be changed later or not)
-
-*It brings more viewers if you are first*
+# Twitchcliper
 
 
 ### Goal
-Fasten a process of creating a video from twich clips and upload them to youtube
+Fasten a process of creating a video from some number of twitch clips\
+and download them without losing any video qualitiy
 
