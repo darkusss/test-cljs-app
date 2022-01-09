@@ -62,7 +62,7 @@
    [description "Add your twitch clip right below"]
    [twitch-clip-link-input (:twitch-link @app-state) "Twitch clip link"]
    [list-of-clips (:twitch-clips @app-state)]
-   [button "Generate & download video" (fn [] (send-clips-to {:hello "WORLD??"})) ]])
+   [button "Generate & download video" (fn [] (send-clips-to (:twitch-clips @app-state))) ]])
 
 (defn app
   []

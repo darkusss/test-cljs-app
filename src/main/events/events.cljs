@@ -30,14 +30,25 @@
 (defn add-link
   [clip-link]
   (let [clipId (validate-link-input clip-link)]
-    (if (and clipId (not-empty-str clipId) (not-link-in-list clipId))
+    (if (and clipId
+             (not-empty-str clipId)
+             (not-link-in-list clipId))
       (add-twitch-clip clipId)
       (show-input-error!))
     (clear-twitch-link!)))
 
+(defn get-clip-mp4-link
+  [clip]
+  (let [thumb (:thumbnail_url clip)]
+    (str (subs thumb 0 (.indexOf thumb "-preview")) ".mp4")))
+
+(defn get-clips-mp4-link
+  [clips]
+  (map #(get-clip-mp4-link %) clips))
+
 (defn send-clips-to
   [clips]
-  (send-clips clips))
+  (send-clips (get-clips-mp4-link clips)))
 
 (defn add-link-on-enter
   [event clip-link]

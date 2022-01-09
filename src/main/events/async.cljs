@@ -1,5 +1,5 @@
 (ns events.async
-  (:require [ajax.core :refer [GET POST json-response-format json-request-format]]
+  (:require [ajax.core :refer [GET POST json-response-format]]
             [state :refer [add-clip!]]))
 
 (goog-define TWITCH_AUTHORIZATION_TOKEN "")
@@ -19,10 +19,10 @@
 
 (defn send-clips [clips]
   (POST "http://localhost:7789/api/clips" {:handler clips-handler
-                                       :error-handler error-handler
-                                       :body clips
-                                       :format json-request-format
-                                       :response-format (json-response-format {:keywords? true})}))
+                                           :error-handler error-handler
+                                           :body clips
+                                           ;;  :response-format (json-response-format {:keywords? true})
+                                           }))
 
 (defn add-twitch-clip [clipId]
   (GET (str "https://api.twitch.tv/helix/clips?id=" clipId) {:handler handler
